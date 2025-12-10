@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAIK AUDIO SOUND | บริการเช่าเครื่องเสียงครบวงจร</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* --- CSS Reset & Variables --- */
+        :root {
+            --primary-color: #00d2ff;
+            --secondary-color: #3a7bd5;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #e2e8f0;
+            --text-muted: #94a3b8;
+            --sidebar-width: 250px;
+            --header-height: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- Header / Navigation --- */
+        header {
+            background: rgba(15, 23, 42, 0.95);
+            padding: 0 5%;
+            height: var(--header-height);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* --- LOGO TEXT STYLE --- */
+        .logo {
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+
+        .nav-menu ul { display: flex; gap: 2rem; }
+        .nav-menu a:hover { color: var(--primary-color); }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1002;
+            color: var(--text-color);
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-menu {
+                position: fixed; top: 0; right: -100%; width: var(--sidebar-width); height: 100vh;
+                background: var(--card-bg);
+                padding-top: var(--header-height);
+                transition: 0.4s ease;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.5); border-left: 1px solid #334155;
+            }
+            .nav-menu.active { right: 0; }
+            .nav-menu ul { flex-direction: column; gap: 0; }
+            .nav-menu li { width: 100%; border-bottom: 1px solid #334155; }
+            .nav-menu a { display: block; padding: 1.5rem 2rem; font-size: 1.1rem; }
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 70%);
+            padding: 0 2rem;
+            margin-top: var(--header-height);
+        }
+
+        /* --- แก้ไขส่วนนี้ให้เป็นทรงกลม (Profile Style) --- */
+        .hero-logo {
+            width: 180px;            /* กำหนดความกว้าง */
+            height: 180px;           /* กำหนดความสูงให้เท่ากัน */
+            border-radius: 50%;      /* ทำมุมให้กลม 100% */
+            object-fit: cover;       /* ให้รูปเต็มวงกลมโดยไม่เสียสัดส่วน */
+            margin-bottom: 2rem;
+            
+            /* เพิ่มความสวยงาม */
+            border: 4px solid var(--primary-color); /* ขอบสีฟ้า */
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.4); /* เงาเรืองแสง */
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 210, 255, 0.5); }
+
+        /* --- Section Styling --- */
+        section { padding: 5rem 10%; }
+        .section-title {
+            text-align: center; font-size: 2rem; margin-bottom: 3rem; position: relative;
+        }
+        .section-title::after {
+            content: ''; display: block; width: 60px; height: 3px; background: var(--primary-color); margin: 10px auto 0;
+        }
+
+        /* --- Services Grid --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .service-card {
+            background: var(--card-bg); padding: 2rem; border-radius: 15px; text-align: center;
+            border: 1px solid #334155; transition: 0.3s;
+        }
+        .service-card:hover { border-color: var(--primary-color); transform: translateY(-5px); }
+        .service-card i { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem; }
+        .service-card h3 { margin-bottom: 0.5rem; }
+        .service-card p { font-size: 0.9rem; color: var(--text-muted); }
+
+        /* --- Pricing Packages --- */
+        .pricing-container { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+        .pricing-card {
+            background: var(--card-bg); padding: 2rem; border-radius: 15px; width: 320px;
+            text-align: center; border: 1px solid #334155; position: relative; overflow: hidden;
+            display: flex; flex-direction: column;
+        }
+        .pricing-card.popular { border-color: var(--primary-color); transform: scale(1.05); z-index: 10; }
+        .pricing-card.popular::before {
+            content: 'ยอดนิยม'; position: absolute; top: 20px; right: -30px;
+            background: var(--primary-color); padding: 5px 30px; transform: rotate(45deg);
+            font-size: 0.8rem; font-weight: bold;
+        }
+        
+        .set-name { font-size: 1.5rem; color: var(--primary-color); font-weight: bold; }
+        .price { font-size: 2.5rem; font-weight: bold; margin: 0.5rem 0; color: white; }
+        .price span { font-size: 1rem; color: var(--text-muted); font-weight: normal; }
+        
+        .pricing-card ul { margin: 1.5rem 0; text-align: left; flex-grow: 1; }
+        .pricing-card li { margin-bottom: 0.8rem; color: var(--text-muted); display: flex; align-items: flex-start; }
+        .pricing-card li i { color: var(--primary-color); margin-right: 10px; margin-top: 5px; }
+        
+        /* --- Work Gallery --- */
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
+        }
+        .gallery-item {
+            background: var(--card-bg); border-radius: 10px; overflow: hidden; border: 1px solid #334155;
+        }
+        .gallery-img-placeholder {
+            width: 100%; height: 200px; background: #334155; display: flex;
+            align-items: center; justify-content: center; color: #64748b;
+        }
+        .gallery-content { padding: 1.5rem; }
+        .gallery-content h4 { margin-bottom: 0.5rem; }
+        .gallery-content p { font-size: 0.9rem; color: var(--text-muted); }
+
+        /* --- Footer --- */
+        footer {
+            background: #020617; text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid #334155;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .pricing-card.popular { transform: scale(1); margin: 1rem 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <i class="fas fa-headphones-alt"></i> MAIK AUDIO SOUND
+        </div>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav class="nav-menu" id="nav-menu">
+            <ul>
+                <li><a href="#home" class="nav-link">หน้าแรก</a></li>
+                <li><a href="#services" class="nav-link">งานที่รับ</a></li>
+                <li><a href="#packages" class="nav-link">ชุดเครื่องเสียง</a></li>
+                <li><a href="#works" class="nav-link">ผลงาน</a></li>
+                <li><a href="#contact" class="nav-link">ติดต่อเรา</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <img src="11..png" alt="Suhaimee Hero Logo" class="hero-logo">
+        
+        <h1>บริการเช่าเครื่องเสียง</h1>
+        <p>รับจัดระบบเสียง แสงสี สำหรับงานแต่งงาน งานอีเวนท์ งานประชุม และงานสังสรรค์ทุกรูปแบบ</p>
+        <a href="#packages" class="btn">ดูชุดเครื่องเสียง & ราคา</a>
+    </section>
+
+    <section id="services">
+        <h2 class="section-title">รองรับทุกรูปแบบงาน</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-heart"></i>
+                <h3>งานแต่งงาน (Wedding)</h3>
+                <p>เครื่องเสียงสวยงาม เสียงนุ่มนวล เพลงเพราะ บรรยากาศโรแมนติก พร้อมไมค์พิธีการคมชัด</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-users"></i>
+                <h3>งานประชุม / สัมมนา</h3>
+                <p>เน้นเสียงพูดชัดเจน ครอบคลุมทั่วห้องประชุม ไมค์ลอยคุณภาพสูง ไม่มีสัญญาณรบกวน</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-glass-cheers"></i>
+                <h3>งานเลี้ยง / สังสรรค์</h3>
+                <p>งานปาร์ตี้ งานวันเกิด คาราโอเกะ พร้อมระบบเสียงเบสแน่นๆ สนุกได้เต็มที่</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-running"></i>
+                <h3>งานกีฬา / กลางแจ้ง</h3>
+                <p>ระบบเสียงชุดใหญ่ ยิงไกล ครอบคลุมพื้นที่กว้าง สนามฟุตบอล หรือลานกิจกรรม</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="packages">
+        <h2 class="section-title">เลือกชุดเครื่องเสียง</h2>
+        <div class="pricing-container">
+            <div class="pricing-card">
+                <div class="set-name">ชุดทั่วไป (Set S)</div>
+                <div class="price">฿3,000 <span>/วัน</span></div>
+                <p style="color:var(--text-muted); font-size: 0.9rem;">เหมาะสำหรับ: งานบูธ, เปิดตัวสินค้า, งานบรรยาย (50-100 คน)</p>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> ลำโพง Active 12" x 2 ใบ</li>
+                    <li><i class="fas fa-check-circle"></i> ขาตั้งลำโพง x 2</li>
+                    <li><i class="fas fa-check-circle"></i> ไมโครโฟนไร้สาย (ไมค์ลอย) x 2 ตัว</li>
+                    <li><i class="fas fa-check-circle"></i> มิกเซอร์ขนาดเล็ก (Analog)</li>
+                    <li><i class="fas fa-check-circle"></i> เจ้าหน้าที่ดูแล 1 ท่าน</li>
+                </ul>
+                <a href="#contact" class="btn" style="background: transparent; border: 1px solid var(--primary-color);">จองชุดนี้</a>
+            </div>
+            <div class="pricing-card popular">
+                <div class="set-name">ชุดงานเวที (Set M)</div>
+                <div class="price">฿5,000 <span>/วัน</span></div>
+                <p style="color:var(--text-muted); font-size: 0.9rem;">เหมาะสำหรับ: งานแต่ง, ดนตรีสดโฟล์คซอง, ปาร์ตี้ (100-300 คน)</p>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> ลำโพงกลางแหลม 15" x 2 ใบ</li>
+                    <li><i class="fas fa-check-circle"></i> ลำโพงซับเบส 18" x 2 ใบ</li>
+                    <li><i class="fas fa-check-circle"></i> มอนิเตอร์เวที x 2 ใบ</li>
+                    <li><i class="fas fa-check-circle"></i> ไมค์ลอย Digital x 4 ตัว</li>
+                    <li><i class="fas fa-check-circle"></i> มิกเซอร์ Digital (iPad Control)</li>
+                    <li><i class="fas fa-check-circle"></i> เจ้าหน้าที่ดูแล 2 ท่าน</li>
+                </ul>
+                <a href="#contact" class="btn">จองชุดนี้</a>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 2rem; color: #64748b;">*ราคายังไม่รวมค่าเดินทาง (คิดตามระยะทาง)</p>
+    </section>
+
+    <section id="works">
+        <h2 class="section-title">ตัวอย่างผลงาน</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
+                <div class="gallery-content">
+                    <h4>งานแต่งงาน คุณบอย & คุณฟ้า</h4>
+                    <p>ติดตั้งชุดกลาง (Set M) + ไฟย้อมห้อง โรงแรมดุสิตธานี</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
+                <div class="gallery-content">
+                    <h4>กีฬาจตุรมิตรสัมพันธ์</h4>
+                    <p>ชุดใหญ่ (Set L) สนามกีฬากลางจังหวัด ระบบเสียงครอบคลุมทั้งสนาม</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
+                <div class="gallery-content">
+                    <h4>Grand Opening ร้านกาแฟ</h4>
+                    <p>ชุดเล็ก (Set S) เน้นเปิดเพลงคลอและพิธีกร 2 ท่าน</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h2 style="margin-bottom: 1rem;">ติดต่อเช่าเครื่องเสียง</h2>
+        <p style="margin-bottom: 1.5rem; color: var(--text-muted);">โทรจองคิว หรือสอบถามรายละเอียดเพิ่มเติม</p>
+        <div style="font-size: 1.2rem; margin-bottom: 2rem; color: white;">
+            <p><i class="fas fa-phone" style="color: var(--primary-color);"></i> 081-234-5678 (คุณซูไฮมี)</p>
+            <p style="margin-top: 10px;"><i class="fab fa-line" style="color: var(--primary-color);"></i> Line ID: suhaimee_sound</p>
+        </div>
+        <div style="font-size: 1.5rem; display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem;">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fas fa-tiktok"></i></a>
+        </div>
+        <p style="font-size: 0.8rem; color: #475569;">© 2025 MAIK AUDIO SOUND. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+    </script>
+
+</body>
+</html>
