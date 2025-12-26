@@ -16,6 +16,9 @@
             --text-muted: #94a3b8;
             --sidebar-width: 250px;
             --header-height: 80px;
+            /* สีของแอป */
+            --line-color: #00c300;
+            --facebook-color: #1877f2;
         }
 
         * {
@@ -50,7 +53,6 @@
             align-items: center;
         }
 
-        /* --- LOGO TEXT STYLE --- */
         .logo {
             z-index: 1001;
             display: flex;
@@ -107,17 +109,14 @@
             margin-top: var(--header-height);
         }
 
-        /* --- แก้ไขส่วนนี้ให้เป็นทรงกลม (Profile Style) --- */
         .hero-logo {
-            width: 180px;            /* กำหนดความกว้าง */
-            height: 180px;           /* กำหนดความสูงให้เท่ากัน */
-            border-radius: 50%;      /* ทำมุมให้กลม 100% */
-            object-fit: cover;       /* ให้รูปเต็มวงกลมโดยไม่เสียสัดส่วน */
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
             margin-bottom: 2rem;
-            
-            /* เพิ่มความสวยงาม */
-            border: 4px solid var(--primary-color); /* ขอบสีฟ้า */
-            box-shadow: 0 0 25px rgba(0, 210, 255, 0.4); /* เงาเรืองแสง */
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
         }
 
         .hero h1 {
@@ -144,6 +143,7 @@
             box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
             border: none;
             cursor: pointer;
+            display: inline-block;
         }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 210, 255, 0.5); }
 
@@ -174,15 +174,16 @@
         /* --- Pricing Packages --- */
         .pricing-container { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
         .pricing-card {
-            background: var(--card-bg); padding: 2rem; border-radius: 15px; width: 320px;
-            text-align: center; border: 1px solid #334155; position: relative; overflow: hidden;
-            display: flex; flex-direction: column;
-        }
-        .pricing-card.popular { border-color: var(--primary-color); transform: scale(1.05); z-index: 10; }
-        .pricing-card.popular::before {
-            content: 'ยอดนิยม'; position: absolute; top: 20px; right: -30px;
-            background: var(--primary-color); padding: 5px 30px; transform: rotate(45deg);
-            font-size: 0.8rem; font-weight: bold;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            width: 320px;
+            text-align: center;
+            border: 1px solid #334155;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
         
         .set-name { font-size: 1.5rem; color: var(--primary-color); font-weight: bold; }
@@ -193,29 +194,146 @@
         .pricing-card li { margin-bottom: 0.8rem; color: var(--text-muted); display: flex; align-items: flex-start; }
         .pricing-card li i { color: var(--primary-color); margin-right: 10px; margin-top: 5px; }
         
-        /* --- Work Gallery --- */
-        .gallery-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
+        /* --- 3D Carousel Styles (15 ITEMS) --- */
+        .carousel-3d-container {
+            margin: 150px auto; /* ระยะห่างด้านบน 150px */
+            width: 200px; 
+            height: 280px; 
+            position: relative;
+            perspective: 2000px;
+            cursor: grab;
         }
+        
+        .carousel-3d-container:active {
+            cursor: grabbing;
+        }
+
+        .carousel-spinner {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out; /* เพื่อความลื่นไหล */
+        }
+
         .gallery-item {
-            background: var(--card-bg); border-radius: 10px; overflow: hidden; border: 1px solid #334155;
+            position: absolute;
+            width: 200px; /* ขนาดการ์ด */
+            height: 100%;
+            left: 0;
+            top: 0;
+            background: var(--card-bg);
+            border-radius: 15px;
+            border: 1px solid #334155;
+            overflow: hidden;
+            opacity: 0.95;
+            transition: all 0.3s;
+            backface-visibility: hidden; /* ซ่อนด้านหลัง */
+            -webkit-backface-visibility: hidden;
+            user-select: none; /* ห้ามเลือกข้อความ */
+            -webkit-user-select: none;
         }
+
+        .gallery-item:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+            opacity: 1;
+        }
+
+        /* 3D Transform Positions (15 Items, Radius 550px) */
+        .carousel-spinner .gallery-item:nth-child(1)  { transform: rotateY(0deg) translateZ(550px); }
+        .carousel-spinner .gallery-item:nth-child(2)  { transform: rotateY(24deg) translateZ(550px); }
+        .carousel-spinner .gallery-item:nth-child(3)  { transform: rotateY(48deg) translateZ(550px); }
+        .carousel-spinner .gallery-item:nth-child(4)  { transform: rotateY(72deg) translateZ(550px); }
+        .carousel-spinner .gallery-item:nth-child(5)  { transform: rotateY(96deg) translateZ(550px); }
+        .carousel-spinner .gallery-item:nth-child(6)  { transform: rotateY(120deg) translateZ(550px); }
+        .carousel-spinner .gallery-item:nth-child(7)  { transform: rotateY(144deg) translateZ(550px); }
+        .carousel-spinner .gallery-item:nth-child(8)  { transform: rotateY(168deg) translateZ(550px); }
+        .carousel-spinner .gallery-item:nth-child(9)  { transform: rotateY(192deg) translateZ(550px); }
+        .carousel-spinner .gallery-item:nth-child(10) { transform: rotateY(216deg) translateZ(550px); }
+        .carousel-spinner .gallery-item:nth-child(11) { transform: rotateY(240deg) translateZ(550px); }
+        .carousel-spinner .gallery-item:nth-child(12) { transform: rotateY(264deg) translateZ(550px); }
+        .carousel-spinner .gallery-item:nth-child(13) { transform: rotateY(288deg) translateZ(550px); }
+        .carousel-spinner .gallery-item:nth-child(14) { transform: rotateY(312deg) translateZ(550px); }
+        .carousel-spinner .gallery-item:nth-child(15) { transform: rotateY(336deg) translateZ(550px); }
+
         .gallery-img-placeholder {
-            width: 100%; height: 200px; background: #334155; display: flex;
+            width: 100%; height: 150px;
+            background: #334155; display: flex;
             align-items: center; justify-content: center; color: #64748b;
         }
-        .gallery-content { padding: 1.5rem; }
-        .gallery-content h4 { margin-bottom: 0.5rem; }
-        .gallery-content p { font-size: 0.9rem; color: var(--text-muted); }
+        .gallery-content { padding: 1rem; text-align: center; }
+        .gallery-content h4 { margin-bottom: 0.5rem; font-size: 0.95rem; }
+        .gallery-content p { font-size: 0.8rem; color: var(--text-muted); }
 
-        /* --- Footer --- */
+        /* --- Footer Styles --- */
         footer {
             background: #020617; text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid #334155;
         }
 
+        .contact-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-pill {
+            display: flex;
+            align-items: center;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid;
+            border-radius: 50px;
+            padding: 10px 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            text-decoration: none;
+            overflow: hidden;
+        }
+
+        .contact-text {
+            max-width: 0;
+            opacity: 0;
+            white-space: nowrap;
+            font-size: 1.1rem;
+            color: white;
+            margin-left: 0;
+            transition: all 0.4s ease;
+        }
+
+        /* สีปุ่มเฉพาะ */
+        .btn-phone { color: var(--primary-color); border-color: var(--primary-color); }
+        .btn-phone:hover, .btn-phone:active {
+            background: var(--primary-color); color: #0f172a;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+        }
+
+        .btn-line { color: var(--line-color); border-color: var(--line-color); }
+        .btn-line:hover, .btn-line:active {
+            background: var(--line-color); color: white;
+            box-shadow: 0 0 15px rgba(0, 195, 0, 0.6);
+        }
+
+        .btn-facebook { color: var(--facebook-color); border-color: var(--facebook-color); }
+        .btn-facebook:hover, .btn-facebook:active {
+            background: var(--facebook-color); color: white;
+            box-shadow: 0 0 15px rgba(24, 119, 242, 0.6);
+        }
+
+        .contact-pill:hover .contact-text,
+        .contact-pill:active .contact-text {
+            max-width: 200px;
+            opacity: 1;
+            margin-left: 10px;
+        }
+
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; }
-            .pricing-card.popular { transform: scale(1); margin: 1rem 0; }
+            .carousel-3d-container { transform: scale(0.45); } 
         }
     </style>
 </head>
@@ -288,9 +406,9 @@
                     <li><i class="fas fa-check-circle"></i> มิกเซอร์ขนาดเล็ก (Analog)</li>
                     <li><i class="fas fa-check-circle"></i> เจ้าหน้าที่ดูแล 1 ท่าน</li>
                 </ul>
-                <a href="#contact" class="btn" style="background: transparent; border: 1px solid var(--primary-color);">จองชุดนี้</a>
             </div>
-            <div class="pricing-card popular">
+            
+            <div class="pricing-card">
                 <div class="set-name">ชุดงานเวที (Set M)</div>
                 <div class="price">฿5,000 <span>/วัน</span></div>
                 <p style="color:var(--text-muted); font-size: 0.9rem;">เหมาะสำหรับ: งานแต่ง, ดนตรีสดโฟล์คซอง, ปาร์ตี้ (100-300 คน)</p>
@@ -302,52 +420,149 @@
                     <li><i class="fas fa-check-circle"></i> มิกเซอร์ Digital (iPad Control)</li>
                     <li><i class="fas fa-check-circle"></i> เจ้าหน้าที่ดูแล 2 ท่าน</li>
                 </ul>
-                <a href="#contact" class="btn">จองชุดนี้</a>
             </div>
         </div>
-        <p style="text-align: center; margin-top: 2rem; color: #64748b;">*ราคายังไม่รวมค่าเดินทาง (คิดตามระยะทาง)</p>
     </section>
 
-    <section id="works">
+    <section id="works" style="overflow: hidden; padding-bottom: 8rem;">
         <h2 class="section-title">ตัวอย่างผลงาน</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
-                <div class="gallery-content">
-                    <h4>งานแต่งงาน คุณบอย & คุณฟ้า</h4>
-                    <p>ติดตั้งชุดกลาง (Set M) + ไฟย้อมห้อง โรงแรมดุสิตธานี</p>
+        
+        <div class="carousel-3d-container" id="carousel-container">
+            <div class="carousel-spinner" id="carousel-spinner">
+                
+                <div class="gallery-item">
+                    <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
+                    <div class="gallery-content">
+                        <h4>งานแต่งงาน (1)</h4>
+                        <p>โรงแรมดุสิตธานี</p>
+                    </div>
                 </div>
-            </div>
-            <div class="gallery-item">
-                <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
-                <div class="gallery-content">
-                    <h4>กีฬาจตุรมิตรสัมพันธ์</h4>
-                    <p>ชุดใหญ่ (Set L) สนามกีฬากลางจังหวัด ระบบเสียงครอบคลุมทั้งสนาม</p>
+                <div class="gallery-item">
+                    <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
+                    <div class="gallery-content">
+                        <h4>กีฬาจตุรมิตร (2)</h4>
+                        <p>สนามกีฬากลาง</p>
+                    </div>
                 </div>
-            </div>
-            <div class="gallery-item">
-                <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
-                <div class="gallery-content">
-                    <h4>Grand Opening ร้านกาแฟ</h4>
-                    <p>ชุดเล็ก (Set S) เน้นเปิดเพลงคลอและพิธีกร 2 ท่าน</p>
+                <div class="gallery-item">
+                    <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
+                    <div class="gallery-content">
+                        <h4>Grand Opening (3)</h4>
+                        <p>ร้านกาแฟ</p>
+                    </div>
                 </div>
+                <div class="gallery-item">
+                    <div class="gallery-img-placeholder"><i class="fas fa-music fa-2x"></i></div>
+                    <div class="gallery-content">
+                        <h4>มินิคอนเสิร์ต (4)</h4>
+                        <p>ลานเบียร์</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img-placeholder"><i class="fas fa-microphone-alt fa-2x"></i></div>
+                    <div class="gallery-content">
+                        <h4>งานสัมมนา (5)</h4>
+                        <p>หอประชุมจังหวัด</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img-placeholder"><i class="fas fa-glass-cheers fa-2x"></i></div>
+                    <div class="gallery-content">
+                        <h4>ปาร์ตี้วันเกิด (6)</h4>
+                        <p>บ้านส่วนตัว</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
+                    <div class="gallery-content">
+                        <h4>งานบวช (7)</h4>
+                        <p>แห่นาคเข้าโบสถ์</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img-placeholder"><i class="fas fa-music fa-2x"></i></div>
+                    <div class="gallery-content">
+                        <h4>งานกาชาด (8)</h4>
+                        <p>เวทีกลาง</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img-placeholder"><i class="fas fa-microphone-alt fa-2x"></i></div>
+                    <div class="gallery-content">
+                        <h4>อบรมวิชาการ (9)</h4>
+                        <p>โรงเรียนเทศบาล</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img-placeholder"><i class="fas fa-glass-cheers fa-2x"></i></div>
+                    <div class="gallery-content">
+                        <h4>งานเลี้ยงรุ่น (10)</h4>
+                        <p>ร้านอาหารริมน้ำ</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
+                    <div class="gallery-content">
+                        <h4>งานขึ้นบ้านใหม่ (11)</h4>
+                        <p>ชุดคาราโอเกะ</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img-placeholder"><i class="fas fa-music fa-2x"></i></div>
+                    <div class="gallery-content">
+                        <h4>ดนตรีในสวน (12)</h4>
+                        <p>Acoustic Band</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img-placeholder"><i class="fas fa-microphone-alt fa-2x"></i></div>
+                    <div class="gallery-content">
+                        <h4>หาเสียงเลือกตั้ง (13)</h4>
+                        <p>รถแห่โฆษณา</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img-placeholder"><i class="fas fa-glass-cheers fa-2x"></i></div>
+                    <div class="gallery-content">
+                        <h4>After Party (14)</h4>
+                        <p>งานแต่งช่วงค่ำ</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
+                    <div class="gallery-content">
+                        <h4>เปิดตัวสินค้า (15)</h4>
+                        <p>ห้างสรรพสินค้า</p>
+                    </div>
+                </div>
+
             </div>
         </div>
+
     </section>
 
     <footer id="contact">
         <h2 style="margin-bottom: 1rem;">ติดต่อเช่าเครื่องเสียง</h2>
-        <p style="margin-bottom: 1.5rem; color: var(--text-muted);">โทรจองคิว หรือสอบถามรายละเอียดเพิ่มเติม</p>
-        <div style="font-size: 1.2rem; margin-bottom: 2rem; color: white;">
-            <p><i class="fas fa-phone" style="color: var(--primary-color);"></i> 081-234-5678 (คุณซูไฮมี)</p>
-            <p style="margin-top: 10px;"><i class="fab fa-line" style="color: var(--primary-color);"></i> Line ID: suhaimee_sound</p>
+        <p style="margin-bottom: 1rem; color: var(--text-muted);">โทรจองคิว หรือสอบถามรายละเอียดเพิ่มเติม</p>
+        
+        <div class="contact-container">
+            <a href="tel:0611939544" class="contact-pill btn-phone">
+                <i class="fas fa-phone"></i>
+                <span class="contact-text">061-1939544</span>
+            </a>
+
+            <a href="https://line.me/ti/p/~0611939544" target="_blank" class="contact-pill btn-line">
+                <i class="fab fa-line"></i>
+                <span class="contact-text">Add Line</span>
+            </a>
+
+            <a href="https://www.facebook.com/usman.nereng?locale=th_TH" target="_blank" class="contact-pill btn-facebook">
+                <i class="fab fa-facebook"></i>
+                <span class="contact-text">Facebook</span>
+            </a>
         </div>
-        <div style="font-size: 1.5rem; display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem;">
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fas fa-tiktok"></i></a>
-        </div>
-        <p style="font-size: 0.8rem; color: #475569;">© 2025 MAIK AUDIO SOUND. All Rights Reserved.</p>
+
+        <p style="font-size: 0.8rem; color: #475569; margin-top: 2rem;">© 2025 MAIK AUDIO SOUND. All Rights Reserved.</p>
     </footer>
 
     <script>
@@ -355,6 +570,7 @@
         const navMenu = document.getElementById('nav-menu');
         const navLinks = document.querySelectorAll('.nav-link');
 
+        // เมนูมือถือ
         mobileMenuBtn.addEventListener('click', () => {
             navMenu.classList.toggle('active');
             const icon = mobileMenuBtn.querySelector('i');
@@ -375,6 +591,79 @@
                 icon.classList.add('fa-bars');
             });
         });
+
+        // --- JavaScript สำหรับหมุน Carousel (Drag & Auto) ---
+        const container = document.getElementById('carousel-container');
+        const spinner = document.getElementById('carousel-spinner');
+        
+        let isDragging = false;
+        let startX;
+        let currentRotation = 0;
+        let previousRotation = 0;
+
+        // Mouse Events
+        container.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.pageX;
+            container.style.cursor = 'grabbing';
+        });
+
+        container.addEventListener('mouseleave', () => {
+            isDragging = false;
+            container.style.cursor = 'grab';
+            previousRotation = currentRotation;
+        });
+
+        container.addEventListener('mouseup', () => {
+            isDragging = false;
+            container.style.cursor = 'grab';
+            previousRotation = currentRotation;
+        });
+
+        container.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX;
+            const walk = (x - startX) * 0.5; 
+            // เปลี่ยน - เป็น + ให้หมุนตามมือ
+            currentRotation = previousRotation + walk; 
+            spinner.style.transform = `rotateY(${currentRotation}deg)`;
+        });
+
+        // Touch Events
+        container.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            startX = e.touches[0].pageX;
+        });
+
+        container.addEventListener('touchend', () => {
+            isDragging = false;
+            previousRotation = currentRotation;
+        });
+
+        container.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const x = e.touches[0].pageX;
+            const walk = (x - startX) * 0.8; 
+            // เปลี่ยน - เป็น + ให้หมุนตามมือ
+            currentRotation = previousRotation + walk; 
+            spinner.style.transform = `rotateY(${currentRotation}deg)`;
+        });
+
+        // Auto-rotate (หมุนเองช้าๆ)
+        let autoRotateSpeed = 0.2; 
+        function animate() {
+            if (!isDragging) {
+                // หมุนเองไปทางซ้าย (ใช้ +)
+                currentRotation += autoRotateSpeed; 
+                spinner.style.transform = `rotateY(${currentRotation}deg)`;
+                previousRotation = currentRotation; 
+            }
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+
     </script>
 
 </body>
