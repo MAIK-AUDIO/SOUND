@@ -163,13 +163,23 @@
             gap: 2rem;
         }
         .service-card {
-            background: var(--card-bg); padding: 2rem; border-radius: 15px; text-align: center;
+            background: var(--card-bg); padding: 2rem; border-radius: 15px; 
+            text-align: center; 
             border: 1px solid #334155; transition: 0.3s;
         }
         .service-card:hover { border-color: var(--primary-color); transform: translateY(-5px); }
         .service-card i { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem; }
-        .service-card h3 { margin-bottom: 0.5rem; }
-        .service-card p { font-size: 0.9rem; color: var(--text-muted); }
+        .service-card h3 { margin-bottom: 1rem; }
+        
+        .service-card p { 
+            font-size: 0.95rem; 
+            color: var(--text-muted); 
+            text-align: left; 
+            margin-bottom: 0.5rem; 
+            padding-left: 10px; 
+            border-left: 2px solid var(--primary-color); 
+            line-height: 1.4;
+        }
 
         /* --- Pricing Packages --- */
         .pricing-container { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
@@ -190,13 +200,19 @@
         .price { font-size: 2.5rem; font-weight: bold; margin: 0.5rem 0; color: white; }
         .price span { font-size: 1rem; color: var(--text-muted); font-weight: normal; }
         
+        /* ป้องกันคำตัด */
+        .pricing-card > p {
+            word-break: keep-all; 
+            overflow-wrap: break-word; 
+        }
+
         .pricing-card ul { margin: 1.5rem 0; text-align: left; flex-grow: 1; }
         .pricing-card li { margin-bottom: 0.8rem; color: var(--text-muted); display: flex; align-items: flex-start; }
         .pricing-card li i { color: var(--primary-color); margin-right: 10px; margin-top: 5px; }
         
-        /* --- 3D Carousel Styles (15 ITEMS) --- */
+        /* --- 3D Carousel Styles --- */
         .carousel-3d-container {
-            margin: 150px auto; /* ระยะห่างด้านบน 150px */
+            margin: 150px auto; 
             width: 200px; 
             height: 280px; 
             position: relative;
@@ -213,12 +229,12 @@
             height: 100%;
             position: absolute;
             transform-style: preserve-3d;
-            transition: transform 0.1s ease-out; /* เพื่อความลื่นไหล */
+            transition: transform 0.1s ease-out;
         }
 
         .gallery-item {
             position: absolute;
-            width: 200px; /* ขนาดการ์ด */
+            width: 200px;
             height: 100%;
             left: 0;
             top: 0;
@@ -228,10 +244,11 @@
             overflow: hidden;
             opacity: 0.95;
             transition: all 0.3s;
-            backface-visibility: hidden; /* ซ่อนด้านหลัง */
+            backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
-            user-select: none; /* ห้ามเลือกข้อความ */
+            user-select: none;
             -webkit-user-select: none;
+            cursor: pointer; 
         }
 
         .gallery-item:hover {
@@ -240,7 +257,7 @@
             opacity: 1;
         }
 
-        /* 3D Transform Positions (15 Items, Radius 550px) */
+        /* 15 Items Position */
         .carousel-spinner .gallery-item:nth-child(1)  { transform: rotateY(0deg) translateZ(550px); }
         .carousel-spinner .gallery-item:nth-child(2)  { transform: rotateY(24deg) translateZ(550px); }
         .carousel-spinner .gallery-item:nth-child(3)  { transform: rotateY(48deg) translateZ(550px); }
@@ -265,6 +282,89 @@
         .gallery-content { padding: 1rem; text-align: center; }
         .gallery-content h4 { margin-bottom: 0.5rem; font-size: 0.95rem; }
         .gallery-content p { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* --- Interaction Hint (ไอคอนมือ) --- */
+        .interaction-hint {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 500;
+            pointer-events: none; /* กดทะลุได้ */
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 4rem; /* ขนาดไอคอน */
+            text-shadow: 0 0 15px rgba(0,0,0,0.8);
+            opacity: 0;
+            /* Animation: ชื่อ, เวลา, loop */
+            animation: swipe-hint-anim 5s infinite;
+        }
+
+        /* Animation สำหรับมือปัด */
+        @keyframes swipe-hint-anim {
+            0% { opacity: 0; transform: translate(-50%, -50%) translateX(0); }
+            10% { opacity: 1; transform: translate(-50%, -50%) translateX(20px); } /* ปรากฏขึ้น */
+            30% { opacity: 1; transform: translate(-50%, -50%) translateX(-20px); } /* ปัดไปซ้าย */
+            50% { opacity: 0; transform: translate(-50%, -50%) translateX(0); } /* จางหายไป */
+            100% { opacity: 0; } /* รอเวลาจนครบ 5 วินาที */
+        }
+
+        /* --- Lightbox Styles --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .lightbox.active { display: flex; animation: fadeIn 0.3s; }
+
+        .lightbox-content {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.5);
+            max-width: 90%;
+            width: 400px;
+            position: relative;
+            transform: scale(0.8);
+            animation: zoomIn 0.3s forwards;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes zoomIn { to { transform: scale(1); } }
+
+        .lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .lightbox-close:hover { color: var(--primary-color); }
+
+        .lightbox-img-placeholder {
+            width: 100%;
+            height: 250px;
+            background: #334155;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-size: 4rem;
+        }
 
         /* --- Footer Styles --- */
         footer {
@@ -305,24 +405,14 @@
             transition: all 0.4s ease;
         }
 
-        /* สีปุ่มเฉพาะ */
         .btn-phone { color: var(--primary-color); border-color: var(--primary-color); }
-        .btn-phone:hover, .btn-phone:active {
-            background: var(--primary-color); color: #0f172a;
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
-        }
+        .btn-phone:hover, .btn-phone:active { background: var(--primary-color); color: #0f172a; box-shadow: 0 0 15px rgba(0, 210, 255, 0.6); }
 
         .btn-line { color: var(--line-color); border-color: var(--line-color); }
-        .btn-line:hover, .btn-line:active {
-            background: var(--line-color); color: white;
-            box-shadow: 0 0 15px rgba(0, 195, 0, 0.6);
-        }
+        .btn-line:hover, .btn-line:active { background: var(--line-color); color: white; box-shadow: 0 0 15px rgba(0, 195, 0, 0.6); }
 
         .btn-facebook { color: var(--facebook-color); border-color: var(--facebook-color); }
-        .btn-facebook:hover, .btn-facebook:active {
-            background: var(--facebook-color); color: white;
-            box-shadow: 0 0 15px rgba(24, 119, 242, 0.6);
-        }
+        .btn-facebook:hover, .btn-facebook:active { background: var(--facebook-color); color: white; box-shadow: 0 0 15px rgba(24, 119, 242, 0.6); }
 
         .contact-pill:hover .contact-text,
         .contact-pill:active .contact-text {
@@ -333,7 +423,12 @@
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; }
-            .carousel-3d-container { transform: scale(0.45); } 
+            
+            .carousel-3d-container { 
+                transform: scale(0.65);
+                margin-top: 120px;
+                margin-bottom: 20px;
+            } 
         }
     </style>
 </head>
@@ -371,23 +466,33 @@
         <div class="services-grid">
             <div class="service-card">
                 <i class="fas fa-heart"></i>
-                <h3>งานแต่งงาน (Wedding)</h3>
-                <p>เครื่องเสียงสวยงาม เสียงนุ่มนวล เพลงเพราะ บรรยากาศโรแมนติก พร้อมไมค์พิธีการคมชัด</p>
+                <h3>งานแต่งงาน</h3>
+                <p>เครื่องเสียงเพราะ</p>
+                <p>เพลงถูกใจตามคำขอ</p>
+                <p>โฆษกอารมณ์ดี</p>
+                <p>พร้อมคาราโอเกะ</p>
             </div>
             <div class="service-card">
                 <i class="fas fa-users"></i>
-                <h3>งานประชุม / สัมมนา</h3>
-                <p>เน้นเสียงพูดชัดเจน ครอบคลุมทั่วห้องประชุม ไมค์ลอยคุณภาพสูง ไม่มีสัญญาณรบกวน</p>
+                <h3>งานประชุม / บรรยาย</h3>
+                <p>เน้นเสียงชัดเจน</p>
+                <p>ไมค์คุณภาพสูง</p>
+                <p>มีซาวด์เปิด-ปิดงาน</p>
             </div>
             <div class="service-card">
-                <i class="fas fa-glass-cheers"></i>
-                <h3>งานเลี้ยง / สังสรรค์</h3>
-                <p>งานปาร์ตี้ งานวันเกิด คาราโอเกะ พร้อมระบบเสียงเบสแน่นๆ สนุกได้เต็มที่</p>
+                <i class="fas fa-music"></i>
+                <h3>งานอนาซีด</h3>
+                <p>เครื่องเสียงเต็มระบบ</p>
+                <p>สเตอริโอ</p>
+                <p>ลำโพงมอนิเตอร์</p>
+                <p>ซาวด์ร้องและคาราโอเกะ</p>
             </div>
             <div class="service-card">
                 <i class="fas fa-running"></i>
                 <h3>งานกีฬา / กลางแจ้ง</h3>
-                <p>ระบบเสียงชุดใหญ่ ยิงไกล ครอบคลุมพื้นที่กว้าง สนามฟุตบอล หรือลานกิจกรรม</p>
+                <p>ระบบเสียงครอบคลุมพื้นที่กว้าง</p>
+                <p>มีซาวด์กีฬา</p>
+                <p>เพลงเชียร์กีฬาตลอดงาน</p>
             </div>
         </div>
     </section>
@@ -398,27 +503,33 @@
             <div class="pricing-card">
                 <div class="set-name">ชุดทั่วไป (Set S)</div>
                 <div class="price">฿3,000 <span>/วัน</span></div>
-                <p style="color:var(--text-muted); font-size: 0.9rem;">เหมาะสำหรับ: งานบูธ, เปิดตัวสินค้า, งานบรรยาย (50-100 คน)</p>
+                <p style="color:var(--text-muted); font-size: 0.9rem;">
+                    เหมาะสำหรับ: งานแต่งงาน, งานประชุม, <span style="white-space: nowrap;">อนาซีด (100 - 300 คน)</span>
+                </p>
                 <ul>
-                    <li><i class="fas fa-check-circle"></i> ลำโพง Active 12" x 2 ใบ</li>
-                    <li><i class="fas fa-check-circle"></i> ขาตั้งลำโพง x 2</li>
-                    <li><i class="fas fa-check-circle"></i> ไมโครโฟนไร้สาย (ไมค์ลอย) x 2 ตัว</li>
-                    <li><i class="fas fa-check-circle"></i> มิกเซอร์ขนาดเล็ก (Analog)</li>
-                    <li><i class="fas fa-check-circle"></i> เจ้าหน้าที่ดูแล 1 ท่าน</li>
+                    <li><i class="fas fa-check-circle"></i> มิกเซอร์ขนาดเล็ก</li>
+                    <li><i class="fas fa-check-circle"></i> ลำโพงชุด 4 x 4</li>
+                    <li><i class="fas fa-check-circle"></i> ลำโพงมอนิเตอร์ 2 ตัว</li>
+                    <li><i class="fas fa-check-circle"></i> ไมค์ลอย 2 ตัว</li>
+                    <li><i class="fas fa-check-circle"></i> ไมค์สาย 2 ตัว</li>
+                    <li><i class="fas fa-check-circle"></i> พร้อมเจ้าหน้าที่ควบคุมเสียง</li>
                 </ul>
             </div>
             
             <div class="pricing-card">
-                <div class="set-name">ชุดงานเวที (Set M)</div>
+                <div class="set-name">ชุดใหญ่ (Set M)</div>
                 <div class="price">฿5,000 <span>/วัน</span></div>
-                <p style="color:var(--text-muted); font-size: 0.9rem;">เหมาะสำหรับ: งานแต่ง, ดนตรีสดโฟล์คซอง, ปาร์ตี้ (100-300 คน)</p>
+                <p style="color:var(--text-muted); font-size: 0.9rem;">
+                    เหมาะสำหรับ: งานบรรยาย, อนาซีด, <span style="white-space: nowrap;">งานกีฬา (300 คนขึ้นไป)</span>
+                </p>
                 <ul>
-                    <li><i class="fas fa-check-circle"></i> ลำโพงกลางแหลม 15" x 2 ใบ</li>
-                    <li><i class="fas fa-check-circle"></i> ลำโพงซับเบส 18" x 2 ใบ</li>
-                    <li><i class="fas fa-check-circle"></i> มอนิเตอร์เวที x 2 ใบ</li>
-                    <li><i class="fas fa-check-circle"></i> ไมค์ลอย Digital x 4 ตัว</li>
-                    <li><i class="fas fa-check-circle"></i> มิกเซอร์ Digital (iPad Control)</li>
-                    <li><i class="fas fa-check-circle"></i> เจ้าหน้าที่ดูแล 2 ท่าน</li>
+                    <li><i class="fas fa-check-circle"></i> มิกเซอร์ชุดใหญ่</li>
+                    <li><i class="fas fa-check-circle"></i> ลำโพงชุด 8 x 8 (ชุดแขวน)</li>
+                    <li><i class="fas fa-check-circle"></i> ลำโพงมอนิเตอร์</li>
+                    <li><i class="fas fa-check-circle"></i> ชุดเอฟเฟกต์</li>
+                    <li><i class="fas fa-check-circle"></i> ไมค์ลอย 4 ตัว</li>
+                    <li><i class="fas fa-check-circle"></i> ไมค์สาย 5 ตัว</li>
+                    <li><i class="fas fa-check-circle"></i> พร้อมเจ้าหน้าที่ควบคุมเสียง</li>
                 </ul>
             </div>
         </div>
@@ -428,118 +539,86 @@
         <h2 class="section-title">ตัวอย่างผลงาน</h2>
         
         <div class="carousel-3d-container" id="carousel-container">
+            <div class="interaction-hint" id="interaction-hint">
+                <i class="fas fa-hand-pointer"></i>
+            </div>
+
             <div class="carousel-spinner" id="carousel-spinner">
                 
                 <div class="gallery-item">
                     <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
-                    <div class="gallery-content">
-                        <h4>งานแต่งงาน (1)</h4>
-                        <p>โรงแรมดุสิตธานี</p>
-                    </div>
+                    <div class="gallery-content"><h4>งานแต่งงาน (1)</h4><p>โรงแรมดุสิตธานี</p></div>
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
-                    <div class="gallery-content">
-                        <h4>กีฬาจตุรมิตร (2)</h4>
-                        <p>สนามกีฬากลาง</p>
-                    </div>
+                    <div class="gallery-content"><h4>กีฬาจตุรมิตร (2)</h4><p>สนามกีฬากลาง</p></div>
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
-                    <div class="gallery-content">
-                        <h4>Grand Opening (3)</h4>
-                        <p>ร้านกาแฟ</p>
-                    </div>
+                    <div class="gallery-content"><h4>Grand Opening (3)</h4><p>ร้านกาแฟ</p></div>
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-img-placeholder"><i class="fas fa-music fa-2x"></i></div>
-                    <div class="gallery-content">
-                        <h4>มินิคอนเสิร์ต (4)</h4>
-                        <p>ลานเบียร์</p>
-                    </div>
+                    <div class="gallery-content"><h4>มินิคอนเสิร์ต (4)</h4><p>ลานเบียร์</p></div>
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-img-placeholder"><i class="fas fa-microphone-alt fa-2x"></i></div>
-                    <div class="gallery-content">
-                        <h4>งานสัมมนา (5)</h4>
-                        <p>หอประชุมจังหวัด</p>
-                    </div>
+                    <div class="gallery-content"><h4>งานสัมมนา (5)</h4><p>หอประชุมจังหวัด</p></div>
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-img-placeholder"><i class="fas fa-glass-cheers fa-2x"></i></div>
-                    <div class="gallery-content">
-                        <h4>ปาร์ตี้วันเกิด (6)</h4>
-                        <p>บ้านส่วนตัว</p>
-                    </div>
+                    <div class="gallery-content"><h4>ปาร์ตี้วันเกิด (6)</h4><p>บ้านส่วนตัว</p></div>
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
-                    <div class="gallery-content">
-                        <h4>งานบวช (7)</h4>
-                        <p>แห่นาคเข้าโบสถ์</p>
-                    </div>
+                    <div class="gallery-content"><h4>งานบวช (7)</h4><p>แห่นาคเข้าโบสถ์</p></div>
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-img-placeholder"><i class="fas fa-music fa-2x"></i></div>
-                    <div class="gallery-content">
-                        <h4>งานกาชาด (8)</h4>
-                        <p>เวทีกลาง</p>
-                    </div>
+                    <div class="gallery-content"><h4>งานกาชาด (8)</h4><p>เวทีกลาง</p></div>
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-img-placeholder"><i class="fas fa-microphone-alt fa-2x"></i></div>
-                    <div class="gallery-content">
-                        <h4>อบรมวิชาการ (9)</h4>
-                        <p>โรงเรียนเทศบาล</p>
-                    </div>
+                    <div class="gallery-content"><h4>อบรมวิชาการ (9)</h4><p>โรงเรียนเทศบาล</p></div>
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-img-placeholder"><i class="fas fa-glass-cheers fa-2x"></i></div>
-                    <div class="gallery-content">
-                        <h4>งานเลี้ยงรุ่น (10)</h4>
-                        <p>ร้านอาหารริมน้ำ</p>
-                    </div>
+                    <div class="gallery-content"><h4>งานเลี้ยงรุ่น (10)</h4><p>ร้านอาหารริมน้ำ</p></div>
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
-                    <div class="gallery-content">
-                        <h4>งานขึ้นบ้านใหม่ (11)</h4>
-                        <p>ชุดคาราโอเกะ</p>
-                    </div>
+                    <div class="gallery-content"><h4>งานขึ้นบ้านใหม่ (11)</h4><p>ชุดคาราโอเกะ</p></div>
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-img-placeholder"><i class="fas fa-music fa-2x"></i></div>
-                    <div class="gallery-content">
-                        <h4>ดนตรีในสวน (12)</h4>
-                        <p>Acoustic Band</p>
-                    </div>
+                    <div class="gallery-content"><h4>ดนตรีในสวน (12)</h4><p>Acoustic Band</p></div>
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-img-placeholder"><i class="fas fa-microphone-alt fa-2x"></i></div>
-                    <div class="gallery-content">
-                        <h4>หาเสียงเลือกตั้ง (13)</h4>
-                        <p>รถแห่โฆษณา</p>
-                    </div>
+                    <div class="gallery-content"><h4>หาเสียงเลือกตั้ง (13)</h4><p>รถแห่โฆษณา</p></div>
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-img-placeholder"><i class="fas fa-glass-cheers fa-2x"></i></div>
-                    <div class="gallery-content">
-                        <h4>After Party (14)</h4>
-                        <p>งานแต่งช่วงค่ำ</p>
-                    </div>
+                    <div class="gallery-content"><h4>After Party (14)</h4><p>งานแต่งช่วงค่ำ</p></div>
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
-                    <div class="gallery-content">
-                        <h4>เปิดตัวสินค้า (15)</h4>
-                        <p>ห้างสรรพสินค้า</p>
-                    </div>
+                    <div class="gallery-content"><h4>เปิดตัวสินค้า (15)</h4><p>ห้างสรรพสินค้า</p></div>
                 </div>
 
             </div>
         </div>
 
     </section>
+
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close">&times;</span>
+            <div id="lightbox-img-container" class="lightbox-img-placeholder"></div>
+            <h3 id="lightbox-title" style="margin-bottom: 0.5rem; font-size: 1.5rem; color: var(--primary-color);"></h3>
+            <p id="lightbox-desc" style="color: var(--text-muted);"></p>
+        </div>
+    </div>
 
     <footer id="contact">
         <h2 style="margin-bottom: 1rem;">ติดต่อเช่าเครื่องเสียง</h2>
@@ -570,7 +649,6 @@
         const navMenu = document.getElementById('nav-menu');
         const navLinks = document.querySelectorAll('.nav-link');
 
-        // เมนูมือถือ
         mobileMenuBtn.addEventListener('click', () => {
             navMenu.classList.toggle('active');
             const icon = mobileMenuBtn.querySelector('i');
@@ -592,20 +670,36 @@
             });
         });
 
-        // --- JavaScript สำหรับหมุน Carousel (Drag & Auto) ---
+        // --- JavaScript สำหรับหมุน Carousel (Drag & Auto), Lightbox และ Hint ---
         const container = document.getElementById('carousel-container');
         const spinner = document.getElementById('carousel-spinner');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        const lightboxTitle = document.getElementById('lightbox-title');
+        const lightboxDesc = document.getElementById('lightbox-desc');
+        const lightboxImgContainer = document.getElementById('lightbox-img-container');
+        const hintIcon = document.getElementById('interaction-hint'); // รับค่าไอคอนมือ
         
         let isDragging = false;
         let startX;
         let currentRotation = 0;
         let previousRotation = 0;
+        let didDrag = false; 
+
+        // ฟังก์ชันซ่อนไอคอนมือเมื่อผู้ใช้เริ่มลาก
+        function hideHint() {
+            if (hintIcon) {
+                hintIcon.style.display = 'none';
+            }
+        }
 
         // Mouse Events
         container.addEventListener('mousedown', (e) => {
             isDragging = true;
+            didDrag = false; 
             startX = e.pageX;
             container.style.cursor = 'grabbing';
+            hideHint(); // ซ่อนไอคอนมือทันทีเมื่อคลิก
         });
 
         container.addEventListener('mouseleave', () => {
@@ -625,7 +719,11 @@
             e.preventDefault();
             const x = e.pageX;
             const walk = (x - startX) * 0.5; 
-            // เปลี่ยน - เป็น + ให้หมุนตามมือ
+            
+            if (Math.abs(walk) > 5) {
+                didDrag = true;
+            }
+
             currentRotation = previousRotation + walk; 
             spinner.style.transform = `rotateY(${currentRotation}deg)`;
         });
@@ -633,7 +731,9 @@
         // Touch Events
         container.addEventListener('touchstart', (e) => {
             isDragging = true;
+            didDrag = false;
             startX = e.touches[0].pageX;
+            hideHint(); // ซ่อนไอคอนมือทันทีเมื่อแตะ
         });
 
         container.addEventListener('touchend', () => {
@@ -645,23 +745,55 @@
             if (!isDragging) return;
             const x = e.touches[0].pageX;
             const walk = (x - startX) * 0.8; 
-            // เปลี่ยน - เป็น + ให้หมุนตามมือ
+
+            if (Math.abs(walk) > 5) {
+                didDrag = true;
+            }
+
             currentRotation = previousRotation + walk; 
             spinner.style.transform = `rotateY(${currentRotation}deg)`;
         });
 
-        // Auto-rotate (หมุนเองช้าๆ)
-        let autoRotateSpeed = 0.2; 
+        // --- Logic เปิด Lightbox ---
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (didDrag) return;
+
+                const iconClass = item.querySelector('i').className;
+                const title = item.querySelector('h4').innerText;
+                const desc = item.querySelector('p').innerText;
+
+                lightboxImgContainer.innerHTML = `<i class="${iconClass}"></i>`;
+                lightboxTitle.innerText = title;
+                lightboxDesc.innerText = desc;
+
+                lightbox.classList.add('active');
+            });
+        });
+
+        // ปิด Lightbox
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+
+        // Auto-rotate (0.05 = ช้าลงมาก)
+        let autoRotateSpeed = 0.05; 
         function animate() {
             if (!isDragging) {
-                // หมุนเองไปทางซ้าย (ใช้ +)
                 currentRotation += autoRotateSpeed; 
                 spinner.style.transform = `rotateY(${currentRotation}deg)`;
                 previousRotation = currentRotation; 
             }
             requestAnimationFrame(animate);
         }
-        
         animate();
 
     </script>
