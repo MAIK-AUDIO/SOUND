@@ -210,7 +210,7 @@
         .pricing-card li { margin-bottom: 0.8rem; color: var(--text-muted); display: flex; align-items: flex-start; }
         .pricing-card li i { color: var(--primary-color); margin-right: 10px; margin-top: 5px; }
         
-        /* --- 3D Carousel Styles --- */
+        /* --- 3D Carousel Styles (10 Items) --- */
         .carousel-3d-container {
             margin: 150px auto; 
             width: 200px; 
@@ -229,7 +229,6 @@
             height: 100%;
             position: absolute;
             transform-style: preserve-3d;
-            transition: transform 0.1s ease-out;
         }
 
         .gallery-item {
@@ -257,32 +256,26 @@
             opacity: 1;
         }
 
-        /* 15 Items Position */
-        .carousel-spinner .gallery-item:nth-child(1)  { transform: rotateY(0deg) translateZ(550px); }
-        .carousel-spinner .gallery-item:nth-child(2)  { transform: rotateY(24deg) translateZ(550px); }
-        .carousel-spinner .gallery-item:nth-child(3)  { transform: rotateY(48deg) translateZ(550px); }
-        .carousel-spinner .gallery-item:nth-child(4)  { transform: rotateY(72deg) translateZ(550px); }
-        .carousel-spinner .gallery-item:nth-child(5)  { transform: rotateY(96deg) translateZ(550px); }
-        .carousel-spinner .gallery-item:nth-child(6)  { transform: rotateY(120deg) translateZ(550px); }
-        .carousel-spinner .gallery-item:nth-child(7)  { transform: rotateY(144deg) translateZ(550px); }
-        .carousel-spinner .gallery-item:nth-child(8)  { transform: rotateY(168deg) translateZ(550px); }
-        .carousel-spinner .gallery-item:nth-child(9)  { transform: rotateY(192deg) translateZ(550px); }
-        .carousel-spinner .gallery-item:nth-child(10) { transform: rotateY(216deg) translateZ(550px); }
-        .carousel-spinner .gallery-item:nth-child(11) { transform: rotateY(240deg) translateZ(550px); }
-        .carousel-spinner .gallery-item:nth-child(12) { transform: rotateY(264deg) translateZ(550px); }
-        .carousel-spinner .gallery-item:nth-child(13) { transform: rotateY(288deg) translateZ(550px); }
-        .carousel-spinner .gallery-item:nth-child(14) { transform: rotateY(312deg) translateZ(550px); }
-        .carousel-spinner .gallery-item:nth-child(15) { transform: rotateY(336deg) translateZ(550px); }
+        /* จัดวาง 10 ใบ: 360 / 10 = 36 องศา, รัศมี 400px */
+        .carousel-spinner .gallery-item:nth-child(1)  { transform: rotateY(0deg) translateZ(400px); }
+        .carousel-spinner .gallery-item:nth-child(2)  { transform: rotateY(36deg) translateZ(400px); }
+        .carousel-spinner .gallery-item:nth-child(3)  { transform: rotateY(72deg) translateZ(400px); }
+        .carousel-spinner .gallery-item:nth-child(4)  { transform: rotateY(108deg) translateZ(400px); }
+        .carousel-spinner .gallery-item:nth-child(5)  { transform: rotateY(144deg) translateZ(400px); }
+        .carousel-spinner .gallery-item:nth-child(6)  { transform: rotateY(180deg) translateZ(400px); }
+        .carousel-spinner .gallery-item:nth-child(7)  { transform: rotateY(216deg) translateZ(400px); }
+        .carousel-spinner .gallery-item:nth-child(8)  { transform: rotateY(252deg) translateZ(400px); }
+        .carousel-spinner .gallery-item:nth-child(9)  { transform: rotateY(288deg) translateZ(400px); }
+        .carousel-spinner .gallery-item:nth-child(10) { transform: rotateY(324deg) translateZ(400px); }
 
         .gallery-img-placeholder {
-            width: 100%; height: 150px;
+            width: 100%; height: 180px; 
             background: #334155; display: flex;
             align-items: center; justify-content: center; color: #64748b;
         }
         .gallery-content { padding: 1rem; text-align: center; }
-        .gallery-content h4 { margin-bottom: 0.5rem; font-size: 0.95rem; }
-        .gallery-content p { font-size: 0.8rem; color: var(--text-muted); }
-
+        .gallery-content h4 { margin-bottom: 0; font-size: 1rem; } 
+        
         /* --- Interaction Hint (ไอคอนมือ) --- */
         .interaction-hint {
             position: absolute;
@@ -290,22 +283,20 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 500;
-            pointer-events: none; /* กดทะลุได้ */
+            pointer-events: none;
             color: rgba(255, 255, 255, 0.8);
-            font-size: 4rem; /* ขนาดไอคอน */
+            font-size: 4rem;
             text-shadow: 0 0 15px rgba(0,0,0,0.8);
             opacity: 0;
-            /* Animation: ชื่อ, เวลา, loop */
             animation: swipe-hint-anim 5s infinite;
         }
 
-        /* Animation สำหรับมือปัด */
         @keyframes swipe-hint-anim {
             0% { opacity: 0; transform: translate(-50%, -50%) translateX(0); }
-            10% { opacity: 1; transform: translate(-50%, -50%) translateX(20px); } /* ปรากฏขึ้น */
-            30% { opacity: 1; transform: translate(-50%, -50%) translateX(-20px); } /* ปัดไปซ้าย */
-            50% { opacity: 0; transform: translate(-50%, -50%) translateX(0); } /* จางหายไป */
-            100% { opacity: 0; } /* รอเวลาจนครบ 5 วินาที */
+            10% { opacity: 1; transform: translate(-50%, -50%) translateX(20px); }
+            30% { opacity: 1; transform: translate(-50%, -50%) translateX(-20px); }
+            50% { opacity: 0; transform: translate(-50%, -50%) translateX(0); }
+            100% { opacity: 0; }
         }
 
         /* --- Lightbox Styles --- */
@@ -457,7 +448,6 @@
         <img src="11..png" alt="Suhaimee Hero Logo" class="hero-logo">
         
         <h1>บริการเช่าเครื่องเสียง</h1>
-        <p>รับจัดระบบเสียง แสงสี สำหรับงานแต่งงาน งานอีเวนท์ งานประชุม และงานสังสรรค์ทุกรูปแบบ</p>
         <a href="#packages" class="btn">ดูชุดเครื่องเสียง & ราคา</a>
     </section>
 
@@ -469,8 +459,8 @@
                 <h3>งานแต่งงาน</h3>
                 <p>เครื่องเสียงเพราะ</p>
                 <p>เพลงถูกใจตามคำขอ</p>
-                <p>โฆษกอารมณ์ดี</p>
-                <p>พร้อมคาราโอเกะ</p>
+                <p>โฆษกอารมณ์ดี (ตลก)</p>
+                <p>พร้อมคาราโอเกะ (ซาวด์)</p>
             </div>
             <div class="service-card">
                 <i class="fas fa-users"></i>
@@ -483,7 +473,7 @@
                 <i class="fas fa-music"></i>
                 <h3>งานอนาซีด</h3>
                 <p>เครื่องเสียงเต็มระบบ</p>
-                <p>สเตอริโอ</p>
+                <p>ระบบเสียงสเตอริโอ</p>
                 <p>ลำโพงมอนิเตอร์</p>
                 <p>ซาวด์ร้องและคาราโอเกะ</p>
             </div>
@@ -501,7 +491,7 @@
         <h2 class="section-title">เลือกชุดเครื่องเสียง</h2>
         <div class="pricing-container">
             <div class="pricing-card">
-                <div class="set-name">ชุดทั่วไป (Set S)</div>
+                <div class="set-name">ชุดเล็ก (Set S)</div>
                 <div class="price">฿3,000 <span>/วัน</span></div>
                 <p style="color:var(--text-muted); font-size: 0.9rem;">
                     เหมาะสำหรับ: งานแต่งงาน, งานประชุม, <span style="white-space: nowrap;">อนาซีด (100 - 300 คน)</span>
@@ -517,7 +507,7 @@
             </div>
             
             <div class="pricing-card">
-                <div class="set-name">ชุดใหญ่ (Set M)</div>
+                <div class="set-name">ชุดทั่วไป (Set M)</div>
                 <div class="price">฿5,000 <span>/วัน</span></div>
                 <p style="color:var(--text-muted); font-size: 0.9rem;">
                     เหมาะสำหรับ: งานบรรยาย, อนาซีด, <span style="white-space: nowrap;">งานกีฬา (300 คนขึ้นไป)</span>
@@ -546,64 +536,54 @@
             <div class="carousel-spinner" id="carousel-spinner">
                 
                 <div class="gallery-item">
-                    <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
-                    <div class="gallery-content"><h4>งานแต่งงาน (1)</h4><p>โรงแรมดุสิตธานี</p></div>
+                    <img src="21.jpg" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="gallery-img-placeholder" style="display:none"><i class="fas fa-camera fa-2x"></i></div>
+                    <div class="gallery-content"><h4>งานแต่งงาน (1)</h4></div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
-                    <div class="gallery-content"><h4>กีฬาจตุรมิตร (2)</h4><p>สนามกีฬากลาง</p></div>
+                    <img src="22.jpg" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="gallery-img-placeholder" style="display:none"><i class="fas fa-camera fa-2x"></i></div>
+                    <div class="gallery-content"><h4>กีฬาจตุรมิตร (2)</h4></div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
-                    <div class="gallery-content"><h4>Grand Opening (3)</h4><p>ร้านกาแฟ</p></div>
+                    <img src="23.jpg" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="gallery-img-placeholder" style="display:none"><i class="fas fa-camera fa-2x"></i></div>
+                    <div class="gallery-content"><h4>Grand Opening (3)</h4></div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-img-placeholder"><i class="fas fa-music fa-2x"></i></div>
-                    <div class="gallery-content"><h4>มินิคอนเสิร์ต (4)</h4><p>ลานเบียร์</p></div>
+                    <img src="24.jpg" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="gallery-img-placeholder" style="display:none"><i class="fas fa-music fa-2x"></i></div>
+                    <div class="gallery-content"><h4>มินิคอนเสิร์ต (4)</h4></div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-img-placeholder"><i class="fas fa-microphone-alt fa-2x"></i></div>
-                    <div class="gallery-content"><h4>งานสัมมนา (5)</h4><p>หอประชุมจังหวัด</p></div>
+                    <img src="25.jpg" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="gallery-img-placeholder" style="display:none"><i class="fas fa-microphone-alt fa-2x"></i></div>
+                    <div class="gallery-content"><h4>งานสัมมนา (5)</h4></div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-img-placeholder"><i class="fas fa-glass-cheers fa-2x"></i></div>
-                    <div class="gallery-content"><h4>ปาร์ตี้วันเกิด (6)</h4><p>บ้านส่วนตัว</p></div>
+                    <img src="26.jpg" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="gallery-img-placeholder" style="display:none"><i class="fas fa-glass-cheers fa-2x"></i></div>
+                    <div class="gallery-content"><h4>ปาร์ตี้วันเกิด (6)</h4></div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
-                    <div class="gallery-content"><h4>งานบวช (7)</h4><p>แห่นาคเข้าโบสถ์</p></div>
+                    <img src="27.jpg" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="gallery-img-placeholder" style="display:none"><i class="fas fa-camera fa-2x"></i></div>
+                    <div class="gallery-content"><h4>งานบวช (7)</h4></div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-img-placeholder"><i class="fas fa-music fa-2x"></i></div>
-                    <div class="gallery-content"><h4>งานกาชาด (8)</h4><p>เวทีกลาง</p></div>
+                    <img src="28.jpg" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="gallery-img-placeholder" style="display:none"><i class="fas fa-music fa-2x"></i></div>
+                    <div class="gallery-content"><h4>งานกาชาด (8)</h4></div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-img-placeholder"><i class="fas fa-microphone-alt fa-2x"></i></div>
-                    <div class="gallery-content"><h4>อบรมวิชาการ (9)</h4><p>โรงเรียนเทศบาล</p></div>
+                    <img src="29.jpg" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="gallery-img-placeholder" style="display:none"><i class="fas fa-microphone-alt fa-2x"></i></div>
+                    <div class="gallery-content"><h4>อบรมวิชาการ (9)</h4></div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-img-placeholder"><i class="fas fa-glass-cheers fa-2x"></i></div>
-                    <div class="gallery-content"><h4>งานเลี้ยงรุ่น (10)</h4><p>ร้านอาหารริมน้ำ</p></div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
-                    <div class="gallery-content"><h4>งานขึ้นบ้านใหม่ (11)</h4><p>ชุดคาราโอเกะ</p></div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-img-placeholder"><i class="fas fa-music fa-2x"></i></div>
-                    <div class="gallery-content"><h4>ดนตรีในสวน (12)</h4><p>Acoustic Band</p></div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-img-placeholder"><i class="fas fa-microphone-alt fa-2x"></i></div>
-                    <div class="gallery-content"><h4>หาเสียงเลือกตั้ง (13)</h4><p>รถแห่โฆษณา</p></div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-img-placeholder"><i class="fas fa-glass-cheers fa-2x"></i></div>
-                    <div class="gallery-content"><h4>After Party (14)</h4><p>งานแต่งช่วงค่ำ</p></div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-img-placeholder"><i class="fas fa-camera fa-2x"></i></div>
-                    <div class="gallery-content"><h4>เปิดตัวสินค้า (15)</h4><p>ห้างสรรพสินค้า</p></div>
+                    <img src="30.jpg" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="gallery-img-placeholder" style="display:none"><i class="fas fa-glass-cheers fa-2x"></i></div>
+                    <div class="gallery-content"><h4>งานเลี้ยงรุ่น (10)</h4></div>
                 </div>
 
             </div>
@@ -615,9 +595,7 @@
         <div class="lightbox-content">
             <span class="lightbox-close">&times;</span>
             <div id="lightbox-img-container" class="lightbox-img-placeholder"></div>
-            <h3 id="lightbox-title" style="margin-bottom: 0.5rem; font-size: 1.5rem; color: var(--primary-color);"></h3>
-            <p id="lightbox-desc" style="color: var(--text-muted);"></p>
-        </div>
+            </div>
     </div>
 
     <footer id="contact">
@@ -670,15 +648,13 @@
             });
         });
 
-        // --- JavaScript สำหรับหมุน Carousel (Drag & Auto), Lightbox และ Hint ---
+        // --- JavaScript สำหรับหมุน Carousel (Drag & Auto) และ Lightbox ---
         const container = document.getElementById('carousel-container');
         const spinner = document.getElementById('carousel-spinner');
         const lightbox = document.getElementById('lightbox');
         const lightboxClose = document.querySelector('.lightbox-close');
-        const lightboxTitle = document.getElementById('lightbox-title');
-        const lightboxDesc = document.getElementById('lightbox-desc');
         const lightboxImgContainer = document.getElementById('lightbox-img-container');
-        const hintIcon = document.getElementById('interaction-hint'); // รับค่าไอคอนมือ
+        const hintIcon = document.getElementById('interaction-hint');
         
         let isDragging = false;
         let startX;
@@ -686,7 +662,6 @@
         let previousRotation = 0;
         let didDrag = false; 
 
-        // ฟังก์ชันซ่อนไอคอนมือเมื่อผู้ใช้เริ่มลาก
         function hideHint() {
             if (hintIcon) {
                 hintIcon.style.display = 'none';
@@ -699,7 +674,7 @@
             didDrag = false; 
             startX = e.pageX;
             container.style.cursor = 'grabbing';
-            hideHint(); // ซ่อนไอคอนมือทันทีเมื่อคลิก
+            hideHint();
         });
 
         container.addEventListener('mouseleave', () => {
@@ -718,7 +693,7 @@
             if (!isDragging) return;
             e.preventDefault();
             const x = e.pageX;
-            const walk = (x - startX) * 0.5; 
+            const walk = (x - startX) * 1.5; 
             
             if (Math.abs(walk) > 5) {
                 didDrag = true;
@@ -733,7 +708,7 @@
             isDragging = true;
             didDrag = false;
             startX = e.touches[0].pageX;
-            hideHint(); // ซ่อนไอคอนมือทันทีเมื่อแตะ
+            hideHint();
         });
 
         container.addEventListener('touchend', () => {
@@ -744,7 +719,7 @@
         container.addEventListener('touchmove', (e) => {
             if (!isDragging) return;
             const x = e.touches[0].pageX;
-            const walk = (x - startX) * 0.8; 
+            const walk = (x - startX) * 3.0; 
 
             if (Math.abs(walk) > 5) {
                 didDrag = true;
@@ -754,26 +729,31 @@
             spinner.style.transform = `rotateY(${currentRotation}deg)`;
         });
 
-        // --- Logic เปิด Lightbox ---
+        // Logic เปิด Lightbox
         const galleryItems = document.querySelectorAll('.gallery-item');
         
         galleryItems.forEach(item => {
             item.addEventListener('click', () => {
                 if (didDrag) return;
 
-                const iconClass = item.querySelector('i').className;
-                const title = item.querySelector('h4').innerText;
-                const desc = item.querySelector('p').innerText;
-
-                lightboxImgContainer.innerHTML = `<i class="${iconClass}"></i>`;
-                lightboxTitle.innerText = title;
-                lightboxDesc.innerText = desc;
+                const img = item.querySelector('img');
+                const iconPlaceholder = item.querySelector('.gallery-img-placeholder');
+                
+                if (img && img.style.display !== 'none') {
+                    lightboxImgContainer.innerHTML = `<img src="${img.src}" style="max-width:100%; max-height:100%; border-radius:10px;">`;
+                    lightboxImgContainer.style.background = 'transparent';
+                } else if (iconPlaceholder) {
+                    const icon = iconPlaceholder.querySelector('i');
+                    if(icon) {
+                        lightboxImgContainer.innerHTML = `<i class="${icon.className}"></i>`;
+                        lightboxImgContainer.style.background = '#334155';
+                    }
+                }
 
                 lightbox.classList.add('active');
             });
         });
 
-        // ปิด Lightbox
         lightboxClose.addEventListener('click', () => {
             lightbox.classList.remove('active');
         });
